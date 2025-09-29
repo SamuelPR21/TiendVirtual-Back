@@ -7,6 +7,7 @@ import './src/models/payment.js'
 import './src/models/products.js'
 import './src/models/recipes.js'
 import './src/models/users.js'
+import productsRouter from './src/routes/products.routes.js'
 
 
 
@@ -19,5 +20,6 @@ app.listen(PORT, () => {
   console.log(`🚀 Servidor backend corriendo en http://localhost:${PORT}`);
 });
 app.use(express.json())
+app.use('/api/products', productsRouter);
 
 connectDB();
