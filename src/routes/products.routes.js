@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
 import Product from '../models/products.js';
+import {authenticaToken} from '../middleware/auth.js';
+
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', authenticaToken, async (req, res) => {
   try {
     const { animal } = req.query;
     const filter = {};
@@ -18,7 +20,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/animal/:animal', async (req, res) => {
+router.get('/animal/:animal', authenticaToken, async (req, res) => {
   try {
     const { animal } = req.params;
     const products = await Product.find({
@@ -30,7 +32,7 @@ router.get('/animal/:animal', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticaToken, async (req, res) => {
   try {
     const { id } = req.params;
     if (!mongoose.isValidObjectId(id)) {
