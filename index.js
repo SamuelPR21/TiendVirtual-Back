@@ -1,4 +1,5 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import connectDB from './src/config/db.js';
 import './src/models/aboutUs.js'
 import './src/models/offer.js'
@@ -7,19 +8,25 @@ import './src/models/payment.js'
 import './src/models/products.js'
 import './src/models/recipes.js'
 import './src/models/users.js'
-import productsRouter from './src/routes/products.routes.js'
+import routes from './src/routes/indexRoutes.js'
 
 
+dotenv.config();
 
 const app = express()   
 const PORT = process.env.PORT || 4000; 
 
+app.use(express.json())
+
+app.use('/carniceria', routes)
+app.get ('/', (req, res) => {
+  res.send('¡Bienvenio al servidor backend de la carnicería!')
+})
 
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor backend corriendo en http://localhost:${PORT}`);
 });
 app.use(express.json())
-app.use('/api/products', productsRouter);
 
 connectDB();

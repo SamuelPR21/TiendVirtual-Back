@@ -4,7 +4,6 @@ import Product from '../models/products.js';
 
 const router = Router();
 
-// API: listar todos (y filtrar por ?animal=)
 router.get('/', async (req, res) => {
   try {
     const { animal } = req.query;
@@ -19,7 +18,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// API: filtrar por animal (ruta)
 router.get('/animal/:animal', async (req, res) => {
   try {
     const { animal } = req.params;
@@ -32,7 +30,6 @@ router.get('/animal/:animal', async (req, res) => {
   }
 });
 
-// API: listar por id
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params;
