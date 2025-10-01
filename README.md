@@ -33,7 +33,7 @@ Crear base de datos en MongoSh con el nombre de carniceria
 ### 4.Ejuctar el proyetco
 
 ```bash
-npm start
+npm run dev
 ```
 o
 
