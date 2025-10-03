@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './src/config/db.js';
 import './src/models/aboutUs.js'
-import './src/models/offer.js'
+import './src/models/offerts.js'
 import './src/models/orders.js'
 import './src/models/payment.js'
 import './src/models/products.js'
@@ -20,7 +20,7 @@ app.use(express.json())
 
 app.use('/carniceria', routes)
 app.get ('/', (req, res) => {
-  res.send('¡Bienvenio al servidor backend de la carnicería!')
+  res.send('¡Bienvenio al servidor backend de carnicería!')
 })
 
 
