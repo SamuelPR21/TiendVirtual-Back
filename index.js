@@ -9,6 +9,7 @@ import './src/models/products.js'
 import './src/models/recipes.js'
 import './src/models/users.js'
 import routes from './src/routes/indexRoutes.js'
+import cookieParser from 'cookie-parser';
 
 
 dotenv.config();
@@ -17,6 +18,7 @@ const app = express()
 const PORT = process.env.PORT || 4000; 
 
 app.use(express.json())
+app.use(cookieParser());
 
 app.use('/carniceria', routes)
 app.get ('/', (req, res) => {

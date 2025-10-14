@@ -1,11 +1,22 @@
 import * as userService from '../service/user.service.js';
 import {UserRegisterRequest} from  '../DTOs/User/userRequest.js'
 import {UserLoginRequest} from  '../DTOs/Login/loginRequest.js'
+import cookieParser from 'cookie-parser';
+
+
 
 export const registerUser = async (req, res) => {
     try {
         const dto = new UserRegisterRequest(req.body);
         const result = await userService.registerUser(dto);
+
+        res.cookie('auth_token', token, {
+            httpOnly: true,         
+            secure: process.env.NODE_ENV === 'production', 
+            sameSite: 'strict',     
+            maxAge: 60 * 60 * 1000  
+          });
+
         res.status(201).json(result);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -16,7 +27,15 @@ export const loginUser = async (req, res) => {
     try {
         const dto = new UserLoginRequest(req.body);
         const token = await userService.loginUser(dto);
-        res.header('Authorization', token).json({ message: 'Login exitoso'});
+        res
+            .cookie('auth_token', token, {
+                httpOnly: true,         
+                secure: process.env.NODE_ENV === 'production', 
+                sameSite: 'strict',     
+                maxAge: 60 * 60 * 1000  
+            })
+            .header('Authorization', token)
+            .json({ message: 'Login exitoso'});
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
