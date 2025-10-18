@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 const AboutUsSchema = new mongoose.Schema({
-    Item: { type: String, required: true },
-    Description: { type: String, required: true },
+    item: { type: String, required: true },
+    description: { type: String, required: true },
 
 });
 
