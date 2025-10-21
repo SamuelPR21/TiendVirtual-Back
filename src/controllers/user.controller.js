@@ -39,3 +39,20 @@ export const getUsers = async (req, res) => {
     }
 }
 
+export const getUserById = async (req, res) => {
+    try {
+        const user = await userService.getUserById(req.params.id);
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({ message: 'Error obteniendo usuario', error: err.message });
+    }
+}
+
+export const getUserProfile = async (req, res) => {
+    try {
+      const userProfile = await userService.getProfile(req.user.userId);
+      res.json({ user: userProfile });
+    } catch (err) {
+      res.status(404).json({ message: err.message || 'Error al obtener perfil' });
+    }
+  };

@@ -68,3 +68,35 @@ export const getUsers = async () => {
         product_preference: user.product_preference,
       }));
 }
+
+export const getUserById = async (id) => {
+    const user = await Users.findById(id).lean();
+    if (!user) {
+        throw new Error('Usuario no encontrado');
+    }
+    return new UserResponse({
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone_Number: user.phone_Number,
+        address: user.address,
+        product_preference: user.product_preference,
+      });
+}
+
+export const getProfile = async (userId) => {
+    
+    const user = await Users.findById(userId);
+    if (!user) {
+      throw new Error('Usuario no encontrado');
+    }
+  
+    return new UserResponse({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      phone_Number: user.phone_Number,
+      address: user.address,
+      product_preference: user.product_preference,
+    });
+}

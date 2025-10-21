@@ -10,6 +10,8 @@ import './src/models/recipes.js'
 import './src/models/users.js'
 import routes from './src/routes/indexRoutes.js'
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
+
 
 
 dotenv.config();
@@ -24,6 +26,11 @@ app.use('/carniceria', routes)
 app.get ('/', (req, res) => {
   res.send('¡Bienvenio al servidor backend de carnicería!')
 })
+
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  credentials: true, 
+}))
 
 
 app.listen(PORT, () => {
