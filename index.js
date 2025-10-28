@@ -19,6 +19,15 @@ dotenv.config();
 const app = express()   
 const PORT = process.env.PORT || 4000; 
 
+
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", // tu frontend
+    credentials: true, // si usas cookies o headers de autenticación
+  })
+);
+
 app.use(express.json())
 app.use(cookieParser());
 
@@ -27,10 +36,7 @@ app.get ('/', (req, res) => {
   res.send('¡Bienvenio al servidor backend de carnicería!')
 })
 
-app.use(cors({
-  origin: 'http://localhost:3000', 
-  credentials: true, 
-}))
+
 
 
 app.listen(PORT, () => {

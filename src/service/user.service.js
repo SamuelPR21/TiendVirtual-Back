@@ -37,7 +37,7 @@ export const registerUser = async (dto) => {
             throw new Error('El correo ya está en uso');
         }
         throw new Error('Error registrando usuario');
-    }
+    }ss
 }
 
 export const loginUser = async (dto) => {
