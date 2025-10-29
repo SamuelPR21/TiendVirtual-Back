@@ -23,8 +23,8 @@ const PORT = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // tu frontend
-    credentials: true, // si usas cookies o headers de autenticación
+    origin: "http://localhost:3000", 
+    credentials: true, 
   })
 );
 
