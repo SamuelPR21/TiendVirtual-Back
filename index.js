@@ -1,41 +1,42 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import connectDB from './src/config/db.js';
-import './src/models/aboutUs.js'
-import './src/models/offerts.js'
-import './src/models/orders.js'
-import './src/models/payment.js'
-import './src/models/products.js'
-import './src/models/recipes.js'
-import './src/models/users.js'
-import routes from './src/routes/indexRoutes.js'
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
-
+import connectDB from './src/config/db.js';
+import './src/models/aboutUs.js';
+import './src/models/offerts.js';
+import './src/models/orders.js';
+import './src/models/payment.js';
+import './src/models/products.js';
+import './src/models/recipes.js';
+import './src/models/users.js';
+import routes from './src/routes/indexRoutes.js';
 
 dotenv.config();
 
-const app = express()   
-const PORT = process.env.PORT || 4000; 
+const app = express();
+const PORT = process.env.PORT || 4000;
 
-app.use(express.json())
+// 1) CORS SIEMPRE ANTES DE LAS RUTAS
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
+
+// 2) Parsers antes de rutas
+app.use(express.json());
 app.use(cookieParser());
 
-app.use('/carniceria', routes)
-app.get ('/', (req, res) => {
-  res.send('¡Bienvenio al servidor backend de carnicería!')
-})
+// 3) Rutas
+app.use('/carniceria', routes);
+app.get('/', (_req, res) => {
+  res.send('¡Bienvenio al servidor backend de carnicería!');
+});
 
-app.use(cors({
-  origin: 'http://localhost:3000', 
-  credentials: true, 
-}))
-
+// 4) Conexión DB y listen
+connectDB();
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor backend corriendo en http://localhost:${PORT}`);
 });
-app.use(express.json())
-
-connectDB();
