@@ -1,5 +1,5 @@
 import Products from "../models/products.js";
-import { ProductResponse } from "../DTOs/product/productResponse.js";
+import { ProductResponse } from "../DTOs/Product/productResponse.js";
 
 const toResponse = (product) =>
   new ProductResponse({

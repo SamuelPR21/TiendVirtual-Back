@@ -3,13 +3,10 @@ import { getProducts, getProductsByAnimal, getProductById,} from "../controllers
 
 const router = Router();
 
-// [ ] GET → Listar todos
 router.get("/", getProducts);
 
-// [ ] GET → Filtrar por animal
 router.get("/animal/:animal", getProductsByAnimal);
 
-// [ ] GET → Listar por id
 router.get("/:id", getProductById);
 
 export default router;

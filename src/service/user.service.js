@@ -2,6 +2,7 @@ import Users from '../models/users.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { UserResponse } from '../DTOs/User/userResponse.js'
+import { response } from 'express'
 
 
 export const registerUser = async (dto) => {
@@ -37,7 +38,7 @@ export const registerUser = async (dto) => {
             throw new Error('El correo ya está en uso');
         }
         throw new Error('Error registrando usuario');
-    }
+    }ss
 }
 
 export const loginUser = async (dto) => {
@@ -99,4 +100,15 @@ export const getProfile = async (userId) => {
       address: user.address,
       product_preference: user.product_preference,
     });
+}
+
+export const logoutUser = async (userId) => {   
+
+    const user = await Users.findById(userId);
+    if (!user) {
+      throw new Error('Usuario no encontrado');
+    }
+    return { message: 'Logout exitoso' };
+
+    
 }

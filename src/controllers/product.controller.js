@@ -1,5 +1,5 @@
 import * as productService from "../service/product.service.js";
-import { ProductListRequest } from "../DTOs/product/productRequest.js";
+import { ProductListRequest } from "../DTOs/Product/productListRequest.js";
 
 // [ ] GET → Listar todos
 export const getProducts = async (req, res) => {
