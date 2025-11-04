@@ -9,6 +9,7 @@ const toResponse = (product) =>
     description: product.description,
     stock: product.stock,
     animal: product.animal,
+    image_url: product.image_url,
   });
 
 // [ ] GET → Listar todos (con filtro opcional por animal)

@@ -4,7 +4,7 @@ const connectDB = async () => {
   console.log("🔌 Conectando a MongoDB...");
 
   try {
-    await mongoose.connect("mongodb://localhost:27017/carniceria", {
+    await mongoose.connect("mongodb://127.0.0.1:27017/carniceria", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
