@@ -26,21 +26,17 @@ app.use(
     credentials: true, 
   })
 );
-
 app.use(express.json())
 app.use(cookieParser());
-
-
-
-// 3) Rutas
 app.use('/carniceria', routes);
+
+
 app.get('/', (_req, res) => {
   res.send('¡Bienvenio al servidor backend de carnicería!');
 });
 
-// 4) Conexión DB y listen
-connectDB();
-
 app.listen(PORT, () => {
   console.log(`🚀 Servidor backend corriendo en http://localhost:${PORT}`);
 });
+
+connectDB();
