@@ -11,7 +11,7 @@ router.get('/obtenerUsers', authenticaToken, getUsers);
 router.post('/login', loginUser);
 router.get('/profile', authenticaToken, getUserProfile); 
 router.get('/:id', authenticaToken, getUserById);
-router.delete('/logout/:id', authenticaToken,logoutUser);        
+router.delete('/logout/', authenticaToken,logoutUser);        
 
 
 
