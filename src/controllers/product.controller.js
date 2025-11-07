@@ -39,3 +39,12 @@ export const getProductById = async (req, res) => {
       .json({ message: "Error obteniendo producto", error: err.message });
   }
 };
+
+export const createProduct = async (req, res) => {
+  try {
+    const result = await productService.createProduct(req.body); // {name,price_lb,description,stock,animal,image_url}
+    res.status(201).json(result);
+  } catch (err) {
+    res.status(400).json({ message: err.message || "Error creando producto" });
+  }
+};

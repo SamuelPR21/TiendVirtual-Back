@@ -46,3 +46,13 @@ export const getRecipesByProduct = async (req, res) => {
     res.status(500).json({ message: "Error filtrando por producto", error: err.message });
   }
 };
+
+// [ ] POST → Crear receta (solo admin)
+export const createRecipe = async (req, res) => {
+  try {
+    const result = await recipeService.createRecipe(req.body); // {name,instructions,ingredients:[{producto_id,quantity}]}
+    res.status(201).json(result);
+  } catch (err) {
+    res.status(400).json({ message: err.message || "Error creando receta" });
+  }
+};

@@ -1,5 +1,5 @@
 export class RecipeResponse {
-  constructor({ id, name, instructions, ingredients }) {
+  constructor({ id, name, instructions, ingredients, image_url }) {
     this.id = id;
     this.name = name;
     this.instructions = instructions;
@@ -8,5 +8,6 @@ export class RecipeResponse {
       producto_id: i.producto_id,
       quantity: i.quantity,
     })) || [];
+    this.image_url = image_url || null; 
   }
 }

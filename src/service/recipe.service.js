@@ -8,6 +8,7 @@ const toResponse = (doc) =>
     name: doc.name,
     instructions: doc.instructions,
     ingredients: doc.ingredients,
+    image_url: doc.image_url,
   });
 
 // [ ] GET → Listar todos
@@ -41,4 +42,36 @@ export const getRecipesByProduct = async (productId) => {
   const pid = new mongoose.Types.ObjectId(productId);
   const recipes = await Recipes.find({ "ingredients.producto_id": pid }).lean();
   return recipes.map(r => toResponse(r));
+};
+
+// [ ] POST → Crear receta (solo admin)
+export const createRecipe = async (dto) => {
+  const required = ["name", "instructions", "ingredients"];
+  for (const f of required) {
+    if (dto[f] === undefined || dto[f] === null) {
+      throw new Error(`Campo requerido: ${f}`);
+    }
+  }
+  if (!Array.isArray(dto.ingredients) || dto.ingredients.length === 0) {
+    throw new Error("ingredients debe ser un arreglo no vacío");
+  }
+
+  const ingredients = dto.ingredients.map(i => {
+    if (!i.producto_id || i.quantity === undefined) {
+      throw new Error("Cada ingrediente debe tener producto_id y quantity");
+    }
+    return {
+      producto_id: new mongoose.Types.ObjectId(i.producto_id),
+      quantity: Number(i.quantity),
+    };
+  });
+
+    const created = await Recipes.create({
+    name: dto.name,
+    instructions: dto.instructions,
+    ingredients,
+    image_url: dto.image_url || null,
+  });
+
+  return toResponse(created);
 };
