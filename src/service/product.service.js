@@ -38,3 +38,21 @@ export const getProductById = async (id) => {
   }
   return toResponse(product);
 };
+
+export const createProduct = async (dto) => {
+  const required = ['name','price_lb','description','stock','animal'];
+  for (const f of required) {
+    if (dto[f] === undefined) throw new Error(`Campo requerido: ${f}`);
+  }
+
+  const doc = await Products.create({
+    name: dto.name,
+    price_lb: dto.price_lb,
+    description: dto.description,
+    stock: dto.stock,
+    animal: dto.animal,
+    image_url: dto.image_url || null,
+  });
+
+  return toResponse(doc);
+};

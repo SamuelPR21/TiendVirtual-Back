@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
     phone_Number: { type: String },
     address: { type: String },
     product_preference: { type: [String] },
+    role: { type: String, enum: ['admin', 'customer'], default: 'customer' } 
 })
 
 
