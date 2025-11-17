@@ -18,7 +18,7 @@ const connectDB = async () => {
 
     mongoose.connection.on("disconnected", () => {
       console.log("⚠️ Desconectado de MongoDB, intentando reconectar...");
-      setTimeout(connectDB, 3000); // reconecta cada 3s
+      setTimeout(connectDB, 3000); 
     });
 
   } catch (error) {
