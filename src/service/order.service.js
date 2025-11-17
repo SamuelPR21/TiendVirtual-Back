@@ -22,3 +22,7 @@ export const getOrdersByDateRange = async (startDate, endDate) => {
 export const updateOrderStatus = async (id, status) => {
   return await Order.findByIdAndUpdate(id, { status }, { new: true });
 };
+
+export const getAllOrders = async () => {
+  return await Order.find();
+};
