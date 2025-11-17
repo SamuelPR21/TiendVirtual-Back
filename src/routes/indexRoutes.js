@@ -5,7 +5,7 @@ import offertsRouter from "./offerts.routes.js";
 import aboutUsRouter from "./aboutUs.routes.js";
 import recipesRouter from "./recipes.routes.js";
 import ordersRoutes from './order.routes.js';
-
+import paymentRoutes from "./payment.routes.js";
 
 const router = Router();
 router.use('/user', userRouter);
@@ -13,6 +13,7 @@ router.use('/products', productsRouter);
 router.use('/offerts', offertsRouter);
 router.use('/aboutUs', aboutUsRouter);
 router.use('/recipes', recipesRouter);
-router.use('/pedidos', ordersRoutes);
+router.use('/orders', ordersRoutes);
+router.use("/payments", paymentRoutes);
 
 export default router;

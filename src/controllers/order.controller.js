@@ -80,3 +80,19 @@ export const updateOrderStatus = async (req, res) => {
     res.status(500).json({ message: 'Error al actualizar estado del pedido', error: error.message });
   }
 };
+
+/**
+ * 📋 Listar todos los pedidos (uso administrativo)
+ * @route GET /pedidos/all
+ */
+export const getAllOrders = async (req, res) => {
+  try {
+    const orders = await orderService.getAllOrders();
+    const response = orders.map((o) => OrderResponseDTO.fromModel(o));
+    res.status(200).json(response);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error al obtener pedidos", error: error.message });
+  }
+};

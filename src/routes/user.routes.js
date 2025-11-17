@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import {registerUser, loginUser, getUsers, getUserById, getUserProfile, logoutUser} from '../controllers/user.controller.js'
 import { authenticaToken } from '../middleware/auth.js';
+import User from "../models/users.js";
+
 
 logoutUser
 
