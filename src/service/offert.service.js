@@ -1,12 +1,14 @@
 import Offer from "../models/offerts.js";
+import Product from "../models/products.js";
 import {OffertsResponse} from "../DTOs/offert/offertResponse.js"
 
 export const createOffert = async (dto) => {
     try{
-        const existOffert = await Offer.findOne({product_id: dto.product_id});
-        if (existOffert) {
-            throw new Error('Ya existe una oferta para este producto');
-        }
+        const existOffert = await Offer.findOne({ producto_id: dto.producto_id });
+            if (existOffert) {
+                throw new Error('Ya existe una oferta para este producto');
+            }
+
         
         const newOffert = new Offer({
             name: dto.name,
@@ -38,24 +40,29 @@ export const createOffert = async (dto) => {
    
 }
 
-export const getOfferts = async () => {
-    
+export const getOfferts = async () =>  {
         const offerts = await Offer.find().lean();
-        const offertResponse = offerts.map(offert => new OffertsResponse({
-            id: offert._id,
-            name: offert.name,
-            description: offert.description,
-            discount: offert.discount,
-            producto_id:offert.producto_id,
-            producto_snapshot: offert.producto_snapshot,
-            start_date: offert.start_date,
-            end_date: offert.end_date
-        }));
+    
+        const result = await Promise.all(
+            offerts.map(async (offert) => {
+                const product = await Product.findById(offert.producto_id).lean();
+    
+                return {
+                    id: offert._id,
+                    name: offert.name,
+                    description: offert.description,
+                    discount: offert.discount,
+                    producto_id: offert.producto_id,
+                    producto_snapshot: offert.producto_snapshot,
+                    start_date: offert.start_date,
+                    end_date: offert.end_date,
+                    image_url: product?.image_url || null
+                };
+            })
+        );
+        return result;
+    }
 
-        return offertResponse;
-
-   
-}
 export const getOffertByProductId = async (product_id) => {
     try{
         const offert = await Offer.findOne({producto_id: product_id}).lean();

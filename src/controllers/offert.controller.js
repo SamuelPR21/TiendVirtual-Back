@@ -17,7 +17,9 @@ export const getOfferts = async (req, res) => {
         const offerts = await offertService.getOfferts();
         res.json(offerts);
     }catch(err){
-        res.json({ message: 'Error listando ofertas: ', error: err.message });
+        res
+            .status(500)
+            .json({ message: 'Error listando ofertas: ', error: err.message });
     }
 }
 
